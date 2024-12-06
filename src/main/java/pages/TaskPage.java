@@ -4,22 +4,20 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
 public class TaskPage {
+    private final String inTaskName = "//input[@id='quickSearchInput']";
+    private final String iconTask = "//a[@class='icon-container']";
+    public static final String statusVal = "//span[@id='status-val']";
+    public static final String statusVersion = "//span[@class='shorten']";
+
     public TaskPage openTask(String taskName) {
-        $x("//input[@id='quickSearchInput']").setValue(taskName).click();
-        $x("//a[@class='icon-container']").click();
+        $x(inTaskName).setValue(taskName).click();
+        $x(iconTask).click();
         return this;
     }
 
     public TaskPage verifyTaskDetails(String status, String version) {
-        $x("//span[@id='status-val']").shouldHave(text(status));
-        $x("//span[@class='shorten']").shouldHave(text(version));
-        return this;
-    }
-
-    public TaskPage changeTaskStatus(String newStatus) {
-        $x("//button[text()='Изменить статус']").click();
-        $x("//button[text()='" + newStatus + "']").click();
-        $x("//span[text()='Статус']").shouldHave(text(newStatus)); // Проверяем, что статус изменился
+        $x(statusVal).shouldHave(text(status));
+        $x(statusVersion).shouldHave(text(version));
         return this;
     }
 }

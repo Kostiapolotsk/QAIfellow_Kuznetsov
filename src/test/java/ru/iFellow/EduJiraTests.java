@@ -12,11 +12,14 @@ import pages.TaskPage;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static pages.LoginPage.buttonCreate;
+import static pages.ProjectPage.forAssertAllTasks;
+import static pages.TaskPage.statusVal;
+import static pages.TaskPage.statusVersion;
 
 public class EduJiraTests {
     @AfterEach
     public void tearDown() {
-        // Закрытие браузера после каждого теста
         Selenide.closeWebDriver();
     }
 
@@ -26,8 +29,7 @@ public class EduJiraTests {
         // Шаг 1: Авторизация
         LoginPage loginPage = new LoginPage();
         loginPage.openPage().login("AT10", "Qwerty123");
-        Assert.assertEquals($x("//a[@class='aui-button aui-button-primary aui-style create-issue ']")
-                .getText(), "Создать");
+        Assert.assertEquals($x(buttonCreate).getText(), "Создать");
     }
 
     @Test
@@ -38,9 +40,8 @@ public class EduJiraTests {
         loginPage.openPage().login("AT10", "Qwerty123");
         // Шаг 2: Переход в проект "Test"
         ProjectPage projectPage = new ProjectPage();
-        projectPage.openProject("Проекты");
-        Assert.assertEquals($x("//span[@class='subnavigator-title']")
-                .getText(), "Все задачи");
+        projectPage.openProject();
+        Assert.assertEquals($x(forAssertAllTasks).getText(), "Все задачи");
     }
 
     @Test
@@ -52,7 +53,7 @@ public class EduJiraTests {
 
         // Шаг 2: Переход в проект "Test"
         ProjectPage projectPage = new ProjectPage();
-        projectPage.openProject("Проекты");
+        projectPage.openProject();
 
         // Шаг 3: Проверка количества задач
         int initialTasks = projectPage.getTotalTasks();
@@ -70,7 +71,7 @@ public class EduJiraTests {
 
         // Шаг 2: Переход в проект "Test"
         ProjectPage projectPage = new ProjectPage();
-        projectPage.openProject("Проекты");
+        projectPage.openProject();
 
         // Шаг 3: Проверка количества задач
         int initialTasks = projectPage.getTotalTasks();
@@ -82,10 +83,8 @@ public class EduJiraTests {
         TaskPage taskPage = new TaskPage();
         taskPage.openTask("TestSeleniumATHomework")
                 .verifyTaskDetails("Сделать", "Version 2.0");
-        Assert.assertEquals($x("//span[@id='status-val']")
-                .getText(), "СДЕЛАТЬ");
-        Assert.assertEquals($x("//span[@id='fixVersions-field']")
-                .getText(), "Version 2.0");
+        Assert.assertEquals($x(statusVal).getText(), "СДЕЛАТЬ");
+        Assert.assertEquals($x(statusVersion).getText(), "Version 2.0");
     }
 
     @Test
@@ -97,7 +96,7 @@ public class EduJiraTests {
 
         // Шаг 2: Переход в проект "Test"
         ProjectPage projectPage = new ProjectPage();
-        projectPage.openProject("Проекты");
+        projectPage.openProject();
 
         // Шаг 3: Проверка количества задач
         int initialTasks = projectPage.getTotalTasks();
@@ -112,7 +111,7 @@ public class EduJiraTests {
 
         // Шаг 5: Создание нового бага и изменение статуса
         BugPage bugPage = new BugPage();
-        projectPage.openProject("Проекты");
+        projectPage.openProject();
         bugPage.createNewBug("Нет кнопки 'Оплатить'",
                 "*_Шаги воспроизведения:_*\n" +
                         " # Открыть главную страницу сайта[http://marketsber.ru/]\n" +

@@ -43,8 +43,8 @@ public class Steps {
     }
 
     @When("пользователь переходит в проект {string}")
-    public void openProject(String projectName) {
-        projectPage.openProject(projectName);
+    public void openProject() {
+        projectPage.openProject();
     }
 
     @Then("на странице отображается заголовок {string}")
