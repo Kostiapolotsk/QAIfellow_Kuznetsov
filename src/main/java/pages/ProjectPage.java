@@ -6,17 +6,17 @@ import org.junit.Assert;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ProjectPage {
-    SelenideElement buttonProject = $x("//a[@aria-controls='browse_link-content']");
-    SelenideElement buttonProjectTest = $x("//a[@id='admin_main_proj_link_lnk']");
-    SelenideElement stringSwitchFilter = $x("//button[@id='subnav-trigger']");
-    SelenideElement stringAllTasks = $x("//a[@data-item-id='allissues']");
-    SelenideElement buttonCreateTask = $x("//span[@class='aui-icon aui-icon-small aui-iconfont-add']");
-    SelenideElement issueTypeSelector = $x("//div[@class='iic-widget__issue-type-selector']");
-    SelenideElement taskInfoForGetTotalTasks = $x("//div[@class='showing']");
-    SelenideElement stringCreateTask = $x("//button[@aria-controls='iic-issue-type-dropdown-c1098']");
-    SelenideElement buttonCreateTaskFromTheList = $x("//a[@data-id='10100']");
-    SelenideElement enteringADescription = $x("//textarea[@name='summary']");
-    SelenideElement forAssertAllTasks = $x("//span[@class='subnavigator-title']");
+    SelenideElement buttonProject = $x("//a[@aria-controls='browse_link-content']").as("Кнопка Проекты");
+    SelenideElement buttonProjectTest = $x("//a[@id='admin_main_proj_link_lnk']").as("Кнопка Test (TEST)");
+    SelenideElement stringSwitchFilter = $x("//button[@id='subnav-trigger']").as("Меню - Переключить фильтр");
+    SelenideElement stringAllTasks = $x("//a[@data-item-id='allissues']").as("Кнопка - Все задачи");
+    SelenideElement buttonCreateTask = $x("//span[@class='aui-icon aui-icon-small aui-iconfont-add']").as("Кнопка - Создать задачу");
+    SelenideElement issueTypeSelector = $x("//div[@class='iic-widget__issue-type-selector']").as("Поле для выбора - История, Задача, Ошибка, Epic ");
+    SelenideElement taskInfoForGetTotalTasks = $x("//div[@class='showing']").as("Счетчик кол-ва задач");
+    SelenideElement stringCreateTask = $x("//button[@aria-controls='iic-issue-type-dropdown-c1098']").as("Кнопки для выбора - История, Задача, Ошибка, Epic ");;
+    SelenideElement buttonCreateTaskFromTheList = $x("//a[@data-id='10100']").as("Кнопка - Задача в сплывающем меню");
+    SelenideElement enteringADescription = $x("//textarea[@name='summary']").as("Поле для ввода - Что должно быть сделано");
+    SelenideElement forAssertAllTasks = $x("//span[@class='subnavigator-title']").as("Строка в верхнем левом угру - Все задачи");
 
     public ProjectPage openProject() {
         buttonProject.click();
