@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -16,7 +17,7 @@ public class BugPage {
     SelenideElement fieldEnteringEnvironment = $x("//textarea[@id='environment']").as("Поле ввода - Окружение");
     SelenideElement buttonCreateWindowTask = $x("//input[@id='create-issue-submit']").as("Кнопка создать на рамке - создание задачи");
 
-
+    @Step("Создаем баг")
     public BugPage createNewBug(String subject, String description, String environment) {
         buttonSelectTaskOrBug.click();
         buttonSelectBugFromTheList.click();

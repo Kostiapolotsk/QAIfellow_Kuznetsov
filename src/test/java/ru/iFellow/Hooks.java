@@ -17,6 +17,7 @@ public class Hooks {
     public void initBrowser() {
         Selenide.open("https://edujira.ifellow.ru");
         WebDriverRunner.getWebDriver().manage().window().maximize();
+        login();
     }
 
     @AfterEach

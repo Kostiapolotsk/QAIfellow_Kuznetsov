@@ -6,15 +6,15 @@ import pages.BugPage;
 import pages.LoginPage;
 import pages.ProjectPage;
 import pages.TaskPage;
+import io.qameta.allure.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Epic("Проверка функциональности веб-приложения Jira")
 public class EduJiraTests extends Hooks {
-
     @Test
     @DisplayName("Проверка логина и пароля")
     public void checkLogin() {
-        login();
         LoginPage loginPage = new LoginPage();
         loginPage.buttonCreate("Создать");
     }
@@ -22,8 +22,6 @@ public class EduJiraTests extends Hooks {
     @Test
     @DisplayName("Проверка перехода в Проект")
     public void checkProject() {
-        login();
-
         ProjectPage projectPage = new ProjectPage();
         projectPage.openProject();
         projectPage.assertAllTasksText("Все задачи");
@@ -32,8 +30,6 @@ public class EduJiraTests extends Hooks {
     @Test
     @DisplayName("Проверка количества задач")
     public void checkTask() {
-        login();
-
         ProjectPage projectPage = new ProjectPage();
         projectPage.openProject();
 
@@ -46,8 +42,6 @@ public class EduJiraTests extends Hooks {
     @Test
     @DisplayName("Проверка деталей задачи: Сделать и Version 2.0")
     public void CheckingTaskDetails() {
-        login();
-
         ProjectPage projectPage = new ProjectPage();
         projectPage.openProject();
 
@@ -64,8 +58,6 @@ public class EduJiraTests extends Hooks {
     @Test
     @DisplayName("Создание бага")
     public void checkBug() {
-        login();
-
         ProjectPage projectPage = new ProjectPage();
         projectPage.openProject();
 
