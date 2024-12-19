@@ -1,11 +1,12 @@
-package ru.iFellow;
+package ru.iFellow.tests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.BugPage;
-import pages.LoginPage;
-import pages.ProjectPage;
-import pages.TaskPage;
+import ru.iFellow.hooks.Hooks;
+import ru.iFellow.pages.BugPage;
+import ru.iFellow.pages.LoginPage;
+import ru.iFellow.pages.ProjectPage;
+import ru.iFellow.pages.TaskPage;
 import io.qameta.allure.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,6 +33,7 @@ public class EduJiraTests extends Hooks {
     public void checkTask() {
         ProjectPage projectPage = new ProjectPage();
         projectPage.openProject();
+        projectPage.assertAllTasksText("Все задачи");
 
         int initialTasks = projectPage.getTotalTasks();
         projectPage.createNewTask("Тестовая задача, удалить после прогона теста");

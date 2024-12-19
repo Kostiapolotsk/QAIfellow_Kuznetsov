@@ -1,4 +1,4 @@
-package pages;
+package ru.iFellow.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -20,7 +20,7 @@ public class ProjectPage {
     SelenideElement forAssertAllTasks = $x("//span[@class='subnavigator-title']").as("Строка в верхнем левом угру - Все задачи");
 
     @Step("Открываем проект")
-    public ProjectPage openProject() {
+    public void openProject() {
         buttonProject.click();
         buttonProjectTest.click();
         stringSwitchFilter.click();
@@ -28,10 +28,9 @@ public class ProjectPage {
         buttonCreateTask.click();
         issueTypeSelector.click();
         sleep(1000);
-        return this;
     }
 
-    @Step("Проверяем кол-во задач")
+    @Step("Получаем кол-во задач")
     public int getTotalTasks() {
         String taskInfo = taskInfoForGetTotalTasks.getText();
         String totalTasks = taskInfo.split("из")[1].trim();
@@ -39,12 +38,11 @@ public class ProjectPage {
     }
 
     @Step("Создаем новую задачу")
-    public ProjectPage createNewTask(String description) {
+    public void createNewTask(String description) {
         stringCreateTask.click();
         buttonCreateTaskFromTheList.click();
         enteringADescription.setValue(description).pressEnter();
         sleep(1000);
-        return this;
     }
 
     @Step("Проверка отображения - Все задачи ")
