@@ -24,7 +24,6 @@
     <junit.vintage.version>5.9.2</junit.vintage.version>
     <restAssured.version>4.2.0</restAssured.version>
     <cucumber.version>7.14.0</cucumber.version>
-    <log4j.version>1.2.17</log4j.version>
     <log4jCore.version>2.13.2</log4jCore.version>
     <aspectj.version>1.9.19</aspectj.version>
     <owner.version>1.0.10</owner.version>
@@ -148,7 +147,7 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.9.5</version>
+      <version>2.13.4.2</version>
     </dependency>
       <dependency>
           <groupId>org.jetbrains</groupId>

@@ -1,11 +1,15 @@
 package fifthLesson.config;
 
-import io.restassured.RestAssured;
+import org.aeonbits.owner.Config;
 
-public class ApiConfig {
-    public static final String MORTY_URL = "https://rickandmortyapi.com/api";
+@Config.Sources("classpath:properties/application.properties")
+public interface ApiConfig extends Config {
+    @Key("morty.url")
+    String mortyUrl();
 
-    public static void setupBaseURIReqres() {
-        RestAssured.baseURI = "https://reqres.in/api";
-    }
+    @Key("base.url")
+    String baseUrl();
+
+    @Key("content.type")
+    String contentType();
 }

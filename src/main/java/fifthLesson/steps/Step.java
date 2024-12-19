@@ -2,14 +2,17 @@ package fifthLesson.steps;
 
 import fifthLesson.config.ApiConfig;
 import io.restassured.response.Response;
+import org.aeonbits.owner.ConfigFactory;
 
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
 public class Step {
+    private static final ApiConfig config = ConfigFactory.create(ApiConfig.class);
+
     public static Response getMortyResponse() {
         return given()
-                .baseUri(ApiConfig.MORTY_URL)
+                .baseUri(config.mortyUrl())
                 .log().all()
                 .queryParam("name", "Morty Smith")
                 .get("/character")
@@ -21,7 +24,6 @@ public class Step {
 
     public static Response getResponseFromUrl(String url) {
         return given()
-                .baseUri(ApiConfig.MORTY_URL)
                 .log().all()
                 .get(url)
                 .then()
