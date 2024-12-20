@@ -1,9 +1,11 @@
-package fifthLesson.steps;
+package steps;
 
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
 import org.aeonbits.owner.ConfigFactory;
-import fifthLesson.config.ApiConfig;
+import config.ApiConfig;
+
+import java.io.File;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -16,14 +18,16 @@ public class TestReqresSteps {
 
     @Given("базовый URL")
     public void setupBaseUrl() {
-      config.baseUrl();
+        config.baseUrl();
     }
 
-    @When("отправлен POST запрос для создания пользователя с телом:")
+    @When("отправлен POST запрос для создания пользователя с телом из файла {string}")
     public void sendPostRequest(String body) {
+        File requestBody = new File("src/test/resources/jsons/" + body);
+
         response = given()
                 .header("Content-Type", config.contentType())
-                .body(body)
+                .body(requestBody)
                 .log().all()
                 .post(config.baseUrl() + "/api/users");
     }
