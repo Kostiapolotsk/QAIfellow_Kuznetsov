@@ -1,13 +1,13 @@
-package fifthLesson.steps;
+package steps;
 
-import fifthLesson.config.ApiConfig;
+import config.ApiConfig;
 import io.restassured.response.Response;
 import org.aeonbits.owner.ConfigFactory;
 
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
-public class Step {
+public class Steps {
     private static final ApiConfig config = ConfigFactory.create(ApiConfig.class);
 
     public static Response getMortyResponse() {
