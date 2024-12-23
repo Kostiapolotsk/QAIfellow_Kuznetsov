@@ -1,17 +1,22 @@
 package steps;
 
 import config.ApiConfig;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import org.aeonbits.owner.ConfigFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
 public class Steps {
     private static final ApiConfig config = ConfigFactory.create(ApiConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(Steps.class);
 
     public static Response getMortyResponse() {
-        return given()
+        Response response = given()
+                .filter(new AllureRestAssured())
                 .baseUri(config.mortyUrl())
                 .log().all()
                 .queryParam("name", "Morty Smith")
@@ -20,16 +25,21 @@ public class Steps {
                 .statusCode(SC_OK)
                 .extract()
                 .response();
+        logResponse(response);
+        return response;
     }
 
     public static Response getResponseFromUrl(String url) {
-        return given()
+        Response response = given()
+                .filter(new AllureRestAssured())
                 .log().all()
                 .get(url)
                 .then()
                 .statusCode(SC_OK)
                 .extract()
                 .response();
+        logResponse(response);
+        return response;
     }
 
     public static int getLastEpisodeNumber(Response responseMorty) {
@@ -59,5 +69,12 @@ public class Steps {
 
     public static String getLastCharacterLocation(Response response) {
         return response.jsonPath().getString("location.name");
+    }
+
+    @SuppressWarnings("unchecked")
+    static void logResponse(Response response) {
+        logger.info("API Response Status Code: {}", response.getStatusCode());
+        logger.info("API Response Headers: {}", response.getHeaders().asList());
+        logger.info("API Response Body: {}", response.prettyPrint());
     }
 }
