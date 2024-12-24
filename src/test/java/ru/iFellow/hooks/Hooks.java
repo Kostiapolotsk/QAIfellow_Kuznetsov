@@ -1,9 +1,9 @@
 package ru.iFellow.hooks;
 
 import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import ru.iFellow.configs.ProjectConfig;
 import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import ru.iFellow.pages.LoginPage;
 
@@ -19,15 +19,15 @@ public class Hooks {
         login();
     }
 
-    @AfterEach
-    public void tearDown() {
-        Selenide.closeWebDriver();
-    }
-
     public void login() {
         String user = config.login();
         String password = config.password();
         LoginPage loginPage = new LoginPage();
         loginPage.login(user, password);
+    }
+
+    @AfterEach
+    public void closeBrowser() {
+        Selenide.closeWebDriver();
     }
 }

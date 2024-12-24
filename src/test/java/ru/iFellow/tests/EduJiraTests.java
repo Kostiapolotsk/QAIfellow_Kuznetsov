@@ -2,17 +2,21 @@ package ru.iFellow.tests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import ru.iFellow.hooks.Hooks;
 import ru.iFellow.pages.BugPage;
 import ru.iFellow.pages.LoginPage;
 import ru.iFellow.pages.ProjectPage;
 import ru.iFellow.pages.TaskPage;
 import io.qameta.allure.*;
+import ru.iFellow.testWatcher.TestListener;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(TestListener.class)
 @Epic("Проверка функциональности веб-приложения Jira")
 public class EduJiraTests extends Hooks {
+
     @Test
     @DisplayName("Проверка логина и пароля")
     public void checkLogin() {
